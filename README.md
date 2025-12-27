@@ -17,8 +17,8 @@ A complete local AI setup running on dual NVIDIA RTX 3090 GPUs (48GB VRAM total)
 | Component | Spec |
 |-----------|------|
 | GPU 1 | NVIDIA RTX 3090 Ti (24GB VRAM) |
-| GPU 2 | NVIDIA RTX 3090 (24GB VRAM) |
-| Total VRAM | 48GB |
+| GPU 2 | NVIDIA RTX 3090 (24GB VRAM) - *adding soon* |
+| Total VRAM | 24GB now, 48GB after upgrade |
 | RAM | 64GB DDR4 |
 | PCIe Config | x16 + x4 (works fine for inference) |
 | OS | Pop!_OS 22.04 |
@@ -50,13 +50,26 @@ git clone https://github.com/coleam00/local-ai-packaged.git
 cd local-ai-packaged
 ```
 
-### 2. Start with NVIDIA Profile
+### 2. Configure Environment
+
+```bash
+cp .env.example .env
+```
+
+### 3. Stop Standalone Ollama (if installed)
+
+```bash
+# Check if running
+pgrep ollama && sudo systemctl stop ollama && sudo systemctl disable ollama
+```
+
+### 4. Start with NVIDIA Profile
 
 ```bash
 python3 start_services.py --profile gpu-nvidia
 ```
 
-### 3. Pull Models
+### 5. Pull Models
 
 ```bash
 # 72B model (uses both GPUs)
@@ -69,7 +82,7 @@ docker exec -it ollama ollama pull qwen2.5:32b-instruct-q5_K_M
 docker exec -it ollama ollama pull nomic-embed-text
 ```
 
-### 4. Access Services
+### 6. Access Services
 
 | Service | URL | Purpose |
 |---------|-----|---------|
@@ -87,11 +100,13 @@ docker exec -it ollama ollama pull nomic-embed-text
 
 ## Workflows
 
-Pre-built n8n workflows in the `workflows/` directory:
+n8n workflows will be added to the `workflows/` directory. Planned:
 
 - **Research Assistant** - Web search + summarization
 - **Document Q&A** - RAG-powered document chat
 - **Daily Briefing** - Automated news summary
+
+*Contributions welcome!*
 
 ## Architecture
 

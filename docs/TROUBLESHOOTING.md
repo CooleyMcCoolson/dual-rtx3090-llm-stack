@@ -88,6 +88,25 @@ nvidia-smi -q -d TEMPERATURE
 
 ## Docker Issues
 
+### Docker Compose Not Found / Wrong Version
+
+**Symptom:** `docker-compose: command not found` or `-p shorthand flag error`
+
+**You need Docker Compose v2 (plugin), not v1 (standalone):**
+```bash
+# Check version
+docker compose version
+# Should show "Docker Compose version v2.x.x"
+
+# If missing or v1, install v2 plugin:
+sudo apt update
+sudo apt install docker-compose-v2
+
+# Use new syntax (space, not hyphen)
+docker compose up -d   # Correct (v2)
+docker-compose up -d   # Old (v1)
+```
+
 ### Containers Won't Start
 
 **Check Docker status:**
@@ -108,7 +127,7 @@ docker compose up -d
 
 ### Port Already in Use
 
-**Symptom:** `Error: port 8080 already in use`
+**Symptom:** `Error: port 8080 already in use` or `port 11434 already in use`
 
 **Find what's using it:**
 ```bash
@@ -117,7 +136,25 @@ sudo lsof -i :8080
 sudo ss -tlnp | grep 8080
 ```
 
-**Solutions:**
+**Port 11434 (Ollama) - Most Common Issue:**
+
+If you have standalone Ollama installed (not in Docker), it conflicts with the containerized version:
+```bash
+# Check if standalone Ollama is running
+pgrep ollama
+
+# Stop and disable it
+sudo systemctl stop ollama
+sudo systemctl disable ollama
+
+# Kill any remaining processes
+sudo pkill -9 ollama
+
+# Verify port is free
+sudo ss -tlnp | grep 11434
+```
+
+**Solutions for other ports:**
 1. Stop the conflicting service
 2. Change port in docker-compose:
    ```yaml
