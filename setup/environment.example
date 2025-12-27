@@ -1,0 +1,78 @@
+# ============================================
+# Dual RTX 3090 LLM Stack - Environment Template
+# ============================================
+# Copy this file to .env and fill in your values
+# cp setup/environment.example .env
+# ============================================
+
+# --------------------------------------------
+# GPU Configuration
+# --------------------------------------------
+# Comma-separated list of GPU IDs (usually 0,1 for dual GPU)
+CUDA_VISIBLE_DEVICES=0,1
+
+# Number of GPUs for Ollama to use
+OLLAMA_NUM_GPU=2
+
+# Power limits (watts) - lower = cooler, minimal perf impact
+# Uncomment and adjust based on your cooling
+# GPU_0_POWER_LIMIT=300
+# GPU_1_POWER_LIMIT=250
+
+# --------------------------------------------
+# Service Ports
+# --------------------------------------------
+WEBUI_PORT=8080
+N8N_PORT=5678
+SEARXNG_PORT=8081
+OLLAMA_PORT=11434
+SUPABASE_PORT=54323
+QDRANT_PORT=6333
+
+# --------------------------------------------
+# Open WebUI
+# --------------------------------------------
+# Secret key for session encryption (generate your own)
+WEBUI_SECRET_KEY=your-secret-key-here-change-me
+
+# Default model to load
+DEFAULT_MODEL=qwen2.5:72b-instruct-q4_K_M
+
+# --------------------------------------------
+# Supabase (for RAG)
+# --------------------------------------------
+POSTGRES_PASSWORD=your-postgres-password
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_KEY=your-service-key
+
+# --------------------------------------------
+# SearXNG (Web Search)
+# --------------------------------------------
+SEARXNG_SECRET=your-searxng-secret-key
+
+# --------------------------------------------
+# n8n (Workflows)
+# --------------------------------------------
+N8N_BASIC_AUTH_USER=admin
+N8N_BASIC_AUTH_PASSWORD=your-n8n-password
+
+# --------------------------------------------
+# Optional: External APIs
+# --------------------------------------------
+# Tavily (better web search for AI)
+# TAVILY_API_KEY=tvly-xxxxx
+
+# OpenAI (if using as fallback)
+# OPENAI_API_KEY=sk-xxxxx
+
+# Anthropic (if using as fallback)
+# ANTHROPIC_API_KEY=sk-ant-xxxxx
+
+# --------------------------------------------
+# Paths (adjust for your system)
+# --------------------------------------------
+# Where to store Ollama models
+OLLAMA_MODELS_PATH=~/.ollama/models
+
+# Where to store persistent data
+DATA_PATH=./data

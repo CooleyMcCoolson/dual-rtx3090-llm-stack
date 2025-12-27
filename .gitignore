@@ -1,0 +1,88 @@
+# ============================================
+# PRIVATE FILES - Never commit these
+# ============================================
+
+# Environment files with secrets
+.env
+.env.local
+.env.production
+*.env
+
+# Private directories (your personal configs)
+*-private/
+prompts-private/
+workflows-private/
+docs-private/
+
+# ============================================
+# DATA & MODELS - Too large / personal
+# ============================================
+
+# Local data directories
+data/
+models/
+volumes/
+*.db
+*.sqlite
+
+# Model files
+*.gguf
+*.bin
+*.safetensors
+
+# ============================================
+# DOCKER - Generated files
+# ============================================
+
+# Docker volumes and data
+docker-data/
+postgres-data/
+supabase-data/
+qdrant-data/
+
+# ============================================
+# OS & EDITOR
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ============================================
+# LOGS & TEMP
+# ============================================
+
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# ============================================
+# PYTHON (if adding scripts)
+# ============================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
